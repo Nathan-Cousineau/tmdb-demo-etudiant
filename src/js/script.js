@@ -18,6 +18,12 @@ class MovieDB{
 
         this.imgPath = "https://image.tmdb.org/t/p/";
 
+        //this.largeurAffiche = ["w92", "w154", "w185", "w342", "w500", "w780"];
+
+        //this.largeurTeteAffiche = ["w45", "w185"];
+
+        //this.largeurToile = ["w300", "w"]
+
         this.totalFilm = 8;
     }
 
@@ -52,7 +58,21 @@ class MovieDB{
 
     afficherDernierFilm(data){
         for (let i = 0; i < data.length; i++) {
-            console.log(data[i].title);
+            //console.log(data[i].title);
+
+            let unArticle = document.querySelector(".template>article.film").cloneNode(true);
+
+            unArticle.querySelector("h2").innerHTML = data[i].title;
+
+            unArticle.querySelector(".description").innerHTML = data[i].overview || "Pas de description";
+
+            let src = this.imgPath + "w342" + data[i].poster_path;
+            let uneImage = unArticle.querySelector("img");
+
+            uneImage.setAttribute("src", src);
+            uneImage.setAttribute("alt", data[i].title);
+
+            document.querySelector(".liste-films").appendChild(unArticle);
         }
     }
 }
